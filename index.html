@@ -785,10 +785,17 @@
           </div>
           <div class="panel-body">
             <div class="play-grid">
-              <div class="field">
-                <label for="playerName">玩家暱稱</label>
-                <input id="playerName" maxlength="16" autocomplete="nickname" placeholder="請輸入名字">
-              </div>
+<div class="field">
+  <label for="playerName">玩家暱稱</label>
+
+  <div style="display:flex; gap:8px;">
+    <input id="playerName" maxlength="16" autocomplete="nickname" placeholder="請輸入名字">
+
+    <button id="confirmNameBtn" type="button" style="min-width:80px;">
+      確認
+    </button>
+  </div>
+</div>
               <div class="field">
                 <label for="guessInput">本次猜題</label>
                 <input id="guessInput" class="guess-input" inputmode="numeric" maxlength="4" placeholder="0123" autocomplete="off">
@@ -877,6 +884,7 @@
       guessBtn: document.querySelector("#guessBtn"),
       newGameBtn: document.querySelector("#newGameBtn"),
       clearRankBtn: document.querySelector("#clearRankBtn"),
+		confirmNameBtn: document.querySelector("#confirmNameBtn"),
       message: document.querySelector("#message"),
       history: document.querySelector("#history"),
       answerState: document.querySelector("#answerState"),
@@ -1283,12 +1291,15 @@
     els.guessInput.addEventListener("keydown", (event) => {
       if (event.key === "Enter") submitGuess();
     });
-    els.playerName.addEventListener("input", () => {
-      syncProfileName(els.playerName.value.trim());
-    });
+
     els.guessBtn.addEventListener("click", submitGuess);
     els.newGameBtn.addEventListener("click", newGame);
     els.clearRankBtn.addEventListener("click", refreshCloudData);
+	  els.confirmNameBtn.addEventListener("click", () => {
+  const name = els.playerName.value.trim() || "花園玩家";
+  syncProfileName(name);
+  showToast("玩家資料已同步。");
+});
   </script>
 </body>
 </html>
