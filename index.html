@@ -1018,8 +1018,6 @@
       cleanGuessInput();
       const guess = els.guessInput.value;
       const name = els.playerName.value.trim() || "花園玩家";
-      syncProfileName(name);
-
       if (!isValidGuess(guess)) {
         setMessage("請輸入 4 個不重複的 0-9 數字，例如 0123。", "bad");
         els.guessInput.select();
